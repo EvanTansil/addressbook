@@ -1,24 +1,23 @@
-import React from 'react'
-import {useEffect, useState} from 'react' 
+import React,  {useEffect, useState} from 'react' 
 import axios from 'axios'
 
 function TableContent(){
     
     const [contacts, setContacts] = useState(null); 
-const [error, SetError] =useState(null);
+const [tableError, SetTableError] =useState(null);
     useEffect(()=>{
         const fetchData= async  ()=>{
 try{
-            const res = await axios.get();
+            const res = await axios.get(); //brando's backend database goes here
 setContacts(res.data);
-        }catch(err){
+        }catch(error){
               
-SetError(error.message)
+SetTableError(error.message)
     }
 }    
 },[])
-if(error){
-return <tr role="row"><th scope="rowspan">Trouble loading contacts?</th></tr>;
+if(tableError){
+return <tr role="row"><th scope="colspan" colespan="7" >Trouble loading contacts?</th></tr>;
 }
 
 if(!contacts){
@@ -30,13 +29,15 @@ if(!contacts){
              <td aria-colindex={4} role="cell">Add job title</td>
              <td aria-colindex={5} role="cell"> Add email.</td>
              <td aria-colindex={6} role="cell">No new notes. Please add notes.</td>
-             <td aria-colindex={7} role="cell"><button type="button">Action</button></td>
+             <td aria-colindex={7} role="cell">
+                <button type="button">Action</button>
+                </td>
                   </tr> 
      )
 }
 
   
-const contactData = contacts.map((contact)=>{
+const contactData = contacts?.map((contact)=>{
         return(
         <tr role="row" key={contact.id}>
              <th scope="row" role="rowheader" aria-colindex={1}>{contact.name}</th>
