@@ -1,17 +1,17 @@
 import react from 'react';
+import {useFormikContext} from 'formik';
 
-
-const EmailAddressInput=({formik})=>{
-
+const EmailAddressInput=({name, label, inputType})=>{
+const{values, handleChange} = useFormikContext();
     return(
         <div>
-    <label htmlFor='email_address'>Email</label>
+    <label htmlFor={name}>{label}</label>
 <input
- name="email"
- id='email_address'
- type='email'
- onChange={formik.handleChange}
-               value={formik.values.email_address}
+ name={name}
+ id={name}
+ type={InputType}
+ onChange={handleChange}
+               value={values[name]}
                />
                </div>
 )

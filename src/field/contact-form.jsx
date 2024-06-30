@@ -1,73 +1,82 @@
 import React from 'react';
-import {useFormik} from 'formik';
+import {Formik, Form, useFormikContext} from 'formik';
 import axios from 'axios';
-import PhoneNumberInput from './phoneNumber';
-import EmailAddressInput from './emailAddress';
+
+const ContactTextField=({label, name,inputType})=>{
+    const{values, handleChange} = useFormikContext();
+    
+    return(
+        <div>
+        <label htmlFor={name}>{label} </label>
+            <input
+             id={name}
+             name={name}
+             type={inputType}
+             value={values[name]}
+            onChange={handleChange}
+                />
+               </div>
+    );
+};
 
 const ContactFormInputs=()=>{
-const formik = useFormik({
-    initialValues:{
-        name: '',
+
+    return(
+        <div>
+<Formik 
+    initialValues={{
+        fullName:'',
         phone_number:'',
         street_address:'',
         job_title:'',
         email_address:'',
-notes:'',
-    },
-    onSubmit :  async (values, {resetForm}) =>{
-        try{
-            const response= await axios.post();
-           console.log(response?.data);
+notes:''
+}}
+    onSubmit ={ (values, {resetForm}) =>{
+        alert(JSON.stringify(values, null, 6)); //Testing form submition
 resetForm()
-        } catch (error){
-    console.log('There was an error submiting your form', error)
-          
-      }
-  
-},
-});
-return(
-    <div>
-    <form onSubmit={formik.handleSubmit}>
+    }  
+}
+    >
+        
+    <Form> {/* Will handle form submit later */}
             <h1>Add a new contact</h1>
-            <label htmlFor='name'>Name </label>
-            <input
-             id="name"
-             name="name"
-             type="text"
-              onChange={formik.handleChange}
-               value={formik.values?.name}/>
-<PhoneNumberInput formik={formik}/>
-<label htmlFor="street_address">Street Address</label>
-<input
-id="street_address"
+            <ContactTextField
+             name="fullName"
+             inputType="text"
+               label="Full Name: "
+               />
+<ContactTextField
+ name="phone_number"
+ inputType="tel"
+ label="Phone Number: "
+/>
+<ContactTextField
 name="street_address"
-type="text"
-onChange={formik.handleChange}
-               value={formik.values?.street_address}
+inputType="text"
+label="Street Address: "
 />
-<label htmlFor="job_title">Job Title</label>
-<input
-id="job_title"
+               
+<ContactTextField
 name="job_title"
-type="text"
-onChange={formik.handleChange}
-               value={formik.values?.job_title}
+inputType="text"
+label="Job Title: "
 />
-<EmailAddressInput formik={formik}/>
-<label htmlFor="notes">Notes</label>
-<input
-id="notes"
+<ContactTextField
+ name="email_address"
+ inputType="email"
+ label="Email Address: "
+/>  
+<ContactTextField
 name="notes"
-type="text"
-onChange={formik.handleChange}
-               value={formik.values?.notes}
-
+inputType="text"
+               label="Notes: "
 />
 <button type="submit">Save Contact</button>
-    </form>
+    </Form>
+    </Formik>
     </div>
-)
+);
 };
 
 export default ContactFormInputs; 
