@@ -33,7 +33,7 @@ const ContactFormInputs=()=>{
 notes:''
 }}
     onSubmit ={ (values, {resetForm}) =>{
-        alert(JSON.stringify(values, null, 6)); //Testing form submition
+        alert(JSON.stringify(values, null, 6)); //Testing form submition got back to commit message notepad file to copy the axios data
 resetForm()
     }  
 }

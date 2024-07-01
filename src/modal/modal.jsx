@@ -1,30 +1,30 @@
 import React, {useState,useEffect,useRef} from 'react';
-import modal from 'react-modal';
+import ReactModal from 'react-modal';
 
 
 const Modal =({buttonName, children})=>{
     
-    const [isModalOpen, setOpenModal] = useState(false);
-const handleOpen= setOpenModal(true);
+    const [isModalOpen, setModalOpen] = useState(false);
+    const handleOpen=()=> setModalOpen(true);
 
-const handleClose=setOpenModal(false);
+const handleClose= ()=>setModalOpen(false);
 
 
 return(
         <div>
         <button type="button" onClick={handleOpen}>{buttonName}</button>
         <ReactModal
-         isOpen={false}
-          contentLabel="Add contact"
+         isOpen={isModalOpen}
+         contentLabel={buttonName}
             onRequestClose={handleClose}
-             shouldCloseOnEsc={true}
+             shouldCloseOnEscape={true}
               role="dialogue"
-              > 
-<button  type="button" onClick={handleClose}>Close</button>
+> 
+<button type="button" onClick={handleClose}>Close</button>
     {children}
     </ReactModal>
         </div>
-    )
+    );
 };
 
-export default ModalComponent;
+export default Modal;
