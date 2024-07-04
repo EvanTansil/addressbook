@@ -1,30 +1,25 @@
 import React, {useState,useEffect,useRef} from 'react';
-import ReactModal from 'react-modal';
+import {Button, Dialog, DialogTrigger, Modal} from 'react-aria-components';
 
 
-const Modal =({buttonName, children})=>{
+const ModalComponent =({buttonName, children})=>{
     
-    const [isModalOpen, setModalOpen] = useState(false);
-    const handleOpen=()=> setModalOpen(true);
-
-const handleClose= ()=>setModalOpen(false);
-
-
 return(
         <div>
-        <button type="button" onClick={handleOpen}>{buttonName}</button>
-        <ReactModal
-         isOpen={isModalOpen}
-         contentLabel={buttonName}
-            onRequestClose={handleClose}
-             shouldCloseOnEscape={true}
-              role="dialogue"
-> 
-<button type="button" onClick={handleClose}>Close</button>
+            <DialogTrigger>
+        <Button>{buttonName}</Button>
+        <Modal>
+        <Dialog>
+      
+    {({close})=>(<>
     {children}
-    </ReactModal>
+    <Button onPress={close}>Cancel</Button>
+    </>)}
+    </Dialog>
+    </Modal>
+    </DialogTrigger>
         </div>
     );
 };
 
-export default Modal;
+export default ModalComponent;

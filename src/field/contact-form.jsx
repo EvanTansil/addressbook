@@ -1,5 +1,5 @@
 import React from 'react';
-import {Formik, Form, useFormikContext} from 'formik';
+import {Formik, Field, Form, useFormikContext} from 'formik';
 import axios from 'axios';
 
 const ContactTextField=({label, name,inputType})=>{
@@ -11,6 +11,7 @@ const ContactTextField=({label, name,inputType})=>{
             <input
              id={name}
              name={name}
+             tabIndex={-1}
              type={inputType}
              value={values[name]}
             onChange={handleChange}
@@ -41,36 +42,41 @@ resetForm()
         
     <Form> {/* Will handle form submit later */}
             <h1>Add a new contact</h1>
-            <ContactTextField
+            <label htmlFor="fullName">Full Name: </label>
+            <Field
              name="fullName"
-             inputType="text"
-               label="Full Name: "
+             type="text"
+               id="fullName"
                />
-<ContactTextField
+               <label htmlFor="phone_number">Phone Number: </label>
+<Field
  name="phone_number"
- inputType="tel"
- label="Phone Number: "
-/>
-<ContactTextField
+ type="tel"
+ id="phone_number"
+ />
+<label htmlFor="street_address">Street Address:  </label>
+<Field
 name="street_address"
-inputType="text"
-label="Street Address: "
+type="text"
+id="street_address"
 />
-               
-<ContactTextField
+              <label htmlFor="job_title">Job Title: </label> 
+<Field
 name="job_title"
-inputType="text"
-label="Job Title: "
+id="job_title"
+type="text"
 />
-<ContactTextField
+<label htmlFor="email_address">Email Address: </label>
+<Field
  name="email_address"
- inputType="email"
- label="Email Address: "
-/>  
-<ContactTextField
+ type="email"
+ id="email_address"
+ />
+<label htmlFor="notes">Notes: </label>  
+<Field
 name="notes"
-inputType="text"
-               label="Notes: "
+type="text"
+               id="notes"
 />
 <button type="submit">Save Contact</button>
     </Form>
