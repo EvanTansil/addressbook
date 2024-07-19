@@ -1,7 +1,7 @@
 import React from 'react';
 import TableComponent from "./component/table.jsx";
-import ContactFormInputs from './field/contact-form.jsx';
 import ModalComponent from './modal/modal.jsx';
+import CreateContact from './fields/createContact.jsx';
 
 function App() {
   
@@ -9,7 +9,7 @@ function App() {
     <>
 <h1>Address Book </h1>
 <ModalComponent buttonName={"Add New Contact"}>
-<ContactFormInputs />
+<CreateContact />
   </ModalComponent>
 
 <TableComponent/>

@@ -1,5 +1,6 @@
 import React,  {useEffect, useState} from 'react' 
 import axios from 'axios'
+import ActionMenu from '../actions/actionMenu';
 
 function TableContent(){
     
@@ -9,12 +10,13 @@ const [tableError, SetTableError] =useState(null);
         const fetchData= async  ()=>{
 try{
             const res = await axios.get(); //brando's backend database goes here
-setContacts(res.data);
+setContacts(res?.data);
         }catch(error){
               
 SetTableError(error.message)
     }
 }    
+fetchData()
 },[])
 if(tableError){
 return <tr role="row"><th scope="colspan" colespan="7" >Trouble loading contacts?</th></tr>;
@@ -39,14 +41,14 @@ if(!contacts){
   
 const contactData = contacts?.map((contact)=>{
         return(
-        <tr role="row" key={contact.id}>
-             <th scope="row" role="rowheader" aria-colindex={1}>{contact.name}</th>
-             <td aria-colindex={2} role="cell">{contact.phone_number}</td>
-             <td aria-colindex={3}  role="cell">{contact.street_address}</td>
+        <tr role="row" key={contact?.id}>
+             <th scope="row" role="rowheader" aria-colindex={1}>{contact?.fullName}</th>
+             <td aria-colindex={2} role="cell">{contact?.phone_number}</td>
+             <td aria-colindex={3}  role="cell">{contact?.street_address}</td>
              <td aria-colindex={4} role="cell">{contact.job_title}</td>
              <td aria-colindex={5} role="cell">{contact.email_address}</td>
              <td aria-colindex={6} role="cell">{contact.notes}</td>
-             <td aria-colindex={7} role="cell"><button type="button">Action</button></td>
+             <td aria-colindex={7} role="cell"><ActionMenu rowId={contact?.id}/></td>
                   </tr> 
      )
      }

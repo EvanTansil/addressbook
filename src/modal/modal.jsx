@@ -7,7 +7,7 @@ const ModalComponent =({buttonName, children})=>{
 return(
         <div>
             <DialogTrigger>
-        <Button>{buttonName}</Button>
+          <Button>{buttonName}</Button>
         <Modal>
         <Dialog>
       
