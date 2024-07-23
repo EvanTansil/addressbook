@@ -1,5 +1,5 @@
 import React from 'react'
-import TableContent from './tableData.jsx'
+import TableContent from './tableData.jsx';
 
 function TableComponent(){
     return(

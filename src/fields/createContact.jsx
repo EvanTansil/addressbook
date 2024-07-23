@@ -1,10 +1,12 @@
-import React from "react";
+import React,{useState} from "react";
 import ContactForms from './contact-form'
 import axios from 'axios';
+import { Formik } from "formik";
 
 
 
 const CreateContact=()=>{
+    
     return(
 <Formik 
     initialValues={{ 
@@ -15,7 +17,7 @@ const CreateContact=()=>{
     email_address:'',
 notes:''
     }}
-    onSubmit ={ (values, {resetForm}) =>{
+    onSubmit ={ async (values, {resetForm}) =>{
 
         try{
             const mapValues = {
@@ -27,15 +29,15 @@ notes:''
             notes:values?.notes || ''
         }     
          
-            const response= await axios.post(//backend, mapValues);
+            const response = await axios.post('http://example.com', mapValues);
                 
 if(response){
            alert('Contact has been created');
-        }
+        };
            resetForm()
         } catch (error){
     console.log('There was an error submiting your form', error)
-          
+        
       }
 
 resetForm()

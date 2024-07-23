@@ -9,17 +9,21 @@ const [tableError, SetTableError] =useState(null);
     useEffect(()=>{
         const fetchData= async  ()=>{
 try{
-            const res = await axios.get(); //brando's backend database goes here
-setContacts(res?.data);
+            const res = await axios.get('') //brando's backend database goes here
+setContacts(res.data);
         }catch(error){
               
 SetTableError(error.message)
     }
 }    
-fetchData()
+//call the fetchData function here.
 },[])
 if(tableError){
-return <tr role="row"><th scope="colspan" colespan="7" >Trouble loading contacts?</th></tr>;
+    return(
+        <>
+         <tr role="row"><th>Trouble loading contacts?</th></tr>
+         </>    
+)
 }
 
 if(!contacts){
@@ -32,7 +36,7 @@ if(!contacts){
              <td aria-colindex={5} role="cell"> Add email.</td>
              <td aria-colindex={6} role="cell">No new notes. Please add notes.</td>
              <td aria-colindex={7} role="cell">
-                <button type="button">Action</button>
+        <ActionMenu/> // the action menu in this cell is just for testing purposes 
                 </td>
                   </tr> 
      )
@@ -45,10 +49,10 @@ const contactData = contacts?.map((contact)=>{
              <th scope="row" role="rowheader" aria-colindex={1}>{contact?.fullName}</th>
              <td aria-colindex={2} role="cell">{contact?.phone_number}</td>
              <td aria-colindex={3}  role="cell">{contact?.street_address}</td>
-             <td aria-colindex={4} role="cell">{contact.job_title}</td>
-             <td aria-colindex={5} role="cell">{contact.email_address}</td>
-             <td aria-colindex={6} role="cell">{contact.notes}</td>
-             <td aria-colindex={7} role="cell"><ActionMenu rowId={contact?.id}/></td>
+             <td aria-colindex={4} role="cell">{contact?.job_title}</td>
+             <td aria-colindex={5} role="cell">{contact?.email_address}</td>
+             <td aria-colindex={6} role="cell">{contact?.notes}</td>
+             <td aria-colindex={7} role="cell"><ActionMenu rowId={contact?.id}/> </td>
                   </tr> 
      )
      }

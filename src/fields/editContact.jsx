@@ -33,14 +33,14 @@ notes:''
 setFormError(error.message)
      }
 fetchData();
+    }
     },[]);
     
     return(
 <Formik 
-    initialValues={formInitialValues        }
-    onSubmit ={ (values, {resetForm}) =>{
+    initialValues={{formInitialValues       } }
+    onSubmit ={ async (values) =>{
 try{
-        async()=>{
     const mapValues = {
         fullName:values?.fullName || '',
         phone_number:values?.phone_number || '',
@@ -52,16 +52,13 @@ try{
  
              await axios.patch(`// backend database${contactId}`,mapValues)
 
-        }
+        
     } catch(error){
         setFormError(error.res?.data?.message || 'An error occurred while editting the contact');
-    }}
+    }
     }   
-
-resetForm()
-    }  
-}
-    >
+    }
+>
 <ContactForms/>
 </Formik>
     )
